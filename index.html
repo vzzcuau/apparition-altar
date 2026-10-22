@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Altar</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Noto+Serif+JP&display=swap');
+
+    :root {
+      --bg: #0d0a08;
+      --gold: #c9a84c;
+      --cream: #f0e6d0;
+      --dim: #7a6a55;
+      --glow: rgba(201, 168, 76, 0.15);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--cream);
+      font-family: 'IM Fell English', serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    .altar {
+      max-width: 580px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .title {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .virgin-name {
+      font-size: 2rem;
+      font-style: italic;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      font-size: 0.85rem;
+      color: var(--dim);
+      font-style: italic;
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+    }
+
+    .divider {
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 2.5rem;
+      opacity: 0.4;
+    }
+
+    /* STAGE 1 — email gate */
+    #stage-email {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    #stage-email p {
+      font-size: 0.9rem;
+      color: var(--dim);
+      font-style: italic;
+      line-height: 1.7;
+      max-width: 420px;
+    }
+
+    input[type="email"] {
+      background: transparent;
+      border: 1px solid var(--gold);
+      border-opacity: 0.4;
+      border-color: rgba(201, 168, 76, 0.4);
+      color: var(--cream);
+      font-family: 'IM Fell English', serif;
+      font-size: 1rem;
+      padding: 0.75rem 1.25rem;
+      width: 100%;
+      max-width: 360px;
+      text-align: center;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    input[type="email"]::placeholder {
+      color: var(--dim);
+    }
+
+    input[type="email"]:focus {
+      border-color: var(--gold);
+    }
+
+    button {
+      background: transparent;
+      border: 1px solid rgba(201, 168, 76, 0.5);
+      color: var(--gold);
+      font-family: 'IM Fell English', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.75rem 2rem;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    button:hover {
+      background: var(--glow);
+      color: var(--cream);
+    }
+
+    button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* STAGE 2 — wish input */
+    #stage-wish {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    #stage-wish p {
+      font-size: 0.9rem;
+      color: var(--dim);
+      font-style: italic;
+      line-height: 1.7;
+    }
+
+    textarea {
+      background: transparent;
+      border: 1px solid rgba(201, 168, 76, 0.4);
+      color: var(--cream);
+      font-family: 'IM Fell English', serif;
+      font-size: 1rem;
+      padding: 1rem 1.25rem;
+      width: 100%;
+      max-width: 460px;
+      min-height: 120px;
+      resize: vertical;
+      outline: none;
+      line-height: 1.6;
+      transition: border-color 0.3s;
+    }
+
+    textarea::placeholder {
+      color: var(--dim);
+    }
+
+    textarea:focus {
+      border-color: var(--gold);
+    }
+
+    /* STAGE 3 — response */
+    #stage-response {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .response-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+
+    .response-text {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.9;
+      max-width: 480px;
+      text-align: center;
+    }
+
+    .share-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .share-row span {
+      font-size: 0.75rem;
+      color: var(--dim);
+      letter-spacing: 0.1em;
+    }
+
+    .share-btn {
+      font-size: 0.75rem;
+      padding: 0.5rem 1.5rem;
+    }
+
+    .another-btn {
+      font-size: 0.75rem;
+      padding: 0.5rem 1.5rem;
+      border-color: rgba(201, 168, 76, 0.2);
+      color: var(--dim);
+    }
+
+    .loading {
+      font-size: 0.85rem;
+      color: var(--dim);
+      font-style: italic;
+      letter-spacing: 0.05em;
+    }
+
+    .error-msg {
+      font-size: 0.8rem;
+      color: #c47a7a;
+      font-style: italic;
+    }
+
+    .film-link {
+      margin-top: 3rem;
+      font-size: 0.7rem;
+      color: var(--dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .film-link a {
+      color: var(--dim);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(122, 106, 85, 0.3);
+      padding-bottom: 1px;
+    }
+
+    .film-link a:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="altar">
+
+  <p class="title">The Digital Altar</p>
+  <h1 class="virgin-name">La Virgen de Tokio</h1>
+  <p class="subtitle">She appeared in a Tokyo izakaya.<br>She has opinions about your situation.</p>
+  <div class="divider"></div>
+
+  <!-- STAGE 1: email gate -->
+  <div id="stage-email">
+    <p>Leave your name with the spirits,<br>then speak your wish or ask your question.</p>
+    <input type="email" id="email-input" placeholder="your@email.com" autocomplete="email" />
+    <button id="email-btn" onclick="submitEmail()">Enter the Altar</button>
+    <span id="email-error" class="error-msg"></span>
+  </div>
+
+  <!-- STAGE 2: wish -->
+  <div id="stage-wish">
+    <p>She is listening.</p>
+    <textarea id="wish-input" placeholder="Make a wish, ask a question, or tell her what you're afraid of…"></textarea>
+    <button id="wish-btn" onclick="submitWish()">Speak</button>
+    <span id="wish-error" class="error-msg"></span>
+  </div>
+
+  <!-- STAGE 3: response -->
+  <div id="stage-response">
+    <span class="response-label">She speaks</span>
+    <p class="response-text" id="response-text"></p>
+    <div class="share-row">
+      <span>— share her words —</span>
+      <button class="share-btn" onclick="copyResponse()">Copy to clipboard</button>
+      <button class="another-btn" onclick="askAnother()">Ask another question</button>
+    </div>
+  </div>
+
+  <p class="film-link">
+    From the short film <a href="https://apparition-film.com" target="_blank">Apparition</a>
+  </p>
+
+</div>
+
+<script>
+  let userEmail = "";
+
+  function showStage(name) {
+    document.getElementById("stage-email").style.display = "none";
+    document.getElementById("stage-wish").style.display = "none";
+    document.getElementById("stage-response").style.display = "none";
+    document.getElementById("stage-" + name).style.display = "flex";
+  }
+
+  function submitEmail() {
+    const email = document.getElementById("email-input").value.trim();
+    const errorEl = document.getElementById("email-error");
+    if (!email || !email.includes("@")) {
+      errorEl.textContent = "A real email, please. She insists.";
+      return;
+    }
+    errorEl.textContent = "";
+    userEmail = email;
+    showStage("wish");
+  }
+
+  async function submitWish() {
+    const wish = document.getElementById("wish-input").value.trim();
+    const errorEl = document.getElementById("wish-error");
+    const btn = document.getElementById("wish-btn");
+
+    if (!wish) {
+      errorEl.textContent = "She cannot answer what has not been asked.";
+      return;
+    }
+
+    errorEl.textContent = "";
+    btn.disabled = true;
+    btn.textContent = "She is considering…";
+
+    try {
+      const res = await fetch("/.netlify/functions/virgin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ wish, email: userEmail }),
+      });
+
+      if (!res.ok) throw new Error("no response");
+
+      const data = await res.json();
+      document.getElementById("response-text").textContent = data.response;
+      showStage("response");
+
+    } catch (e) {
+      errorEl.textContent = "The connection to the beyond is temporarily disrupted. Try again.";
+      btn.disabled = false;
+      btn.textContent = "Speak";
+    }
+  }
+
+  function copyResponse() {
+    const text = document.getElementById("response-text").textContent;
+    const shareText = text + "\n\n— La Virgen de Tokio, from the film Apparition\napparition-film.com";
+    navigator.clipboard.writeText(shareText).then(() => {
+      const btn = event.target;
+      btn.textContent = "Copied";
+      setTimeout(() => { btn.textContent = "Copy to clipboard"; }, 2000);
+    });
+  }
+
+  function askAnother() {
+    document.getElementById("wish-input").value = "";
+    showStage("wish");
+  }
+
+  // allow enter key on email field
+  document.getElementById("email-input").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") submitEmail();
+  });
+</script>
+
+</body>
+</html>
