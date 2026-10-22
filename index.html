@@ -50,15 +50,6 @@
       flex-direction: column;
       align-items: center;
       gap: 1.4rem;
-      opacity: 0;
-      transition: opacity 0.7s ease;
-    }
-    .stage.visible {
-      display: flex;
-      opacity: 1;
-    }
-    .stage.fading {
-      opacity: 0;
     }
 
     /* ── ALTAR SHELF + SMOKE ── */
@@ -388,7 +379,7 @@
   <!-- ══════════════════════════════
        STAGE 1 — EMAIL GATE
   ══════════════════════════════ -->
-  <div class="stage visible" id="stage-email">
+  <div class="stage" id="stage-email" style="display:flex">
 
     <div class="shelf-wrap">
       <img class="altar-shelf" src="altar-shelf.png" alt="The Digital Altar" />
@@ -495,35 +486,15 @@
 
   /* ── STAGE TRANSITIONS ── */
   function showStage(name) {
-    const stages = ["email","wish","response"];
-    const current = stages.find(s => {
-      const el = document.getElementById("stage-" + s);
-      return el.classList.contains("visible");
+    ["email","wish","response"].forEach(s => {
+      document.getElementById("stage-" + s).style.display = "none";
     });
-
-    if (current) {
-      const outEl = document.getElementById("stage-" + current);
-      outEl.classList.add("fading");
-      setTimeout(() => {
-        outEl.classList.remove("visible","fading");
-        outEl.style.display = "none";
-        fadeInStage(name);
-      }, 600);
-    } else {
-      fadeInStage(name);
-    }
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-
-  function fadeInStage(name) {
     const el = document.getElementById("stage-" + name);
     el.style.display = "flex";
     el.style.opacity = "0";
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        el.classList.add("visible");
-      });
-    });
+    el.style.transition = "opacity 0.6s ease";
+    setTimeout(() => { el.style.opacity = "1"; }, 30);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   /* ── EMAIL ── */
