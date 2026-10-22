@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Talk to the Virgin — Apparition</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Lato:wght@300;400&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Cinzel:wght@400;500&family=Lato:wght@300;400&display=swap');
 
     :root {
       --bg: #000;
@@ -68,9 +68,9 @@
     /* smoke: single wisp rising from left (sage bundle) */
     .smoke {
       position: absolute;
-      bottom: 55%;
-      left: 9%;
-      width: 18px;
+      bottom: 18%;
+      left: 7%;
+      width: 28px;
       pointer-events: none;
     }
     .smoke-wisp {
@@ -78,26 +78,26 @@
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 2px;
-      height: 80px;
-      background: linear-gradient(to top, rgba(255,255,255,0.18), transparent);
+      width: 3px;
+      height: 110px;
+      background: linear-gradient(to top, rgba(255,255,255,0.32), transparent);
       border-radius: 50%;
       animation: rise 5s ease-in infinite;
       transform-origin: bottom center;
     }
     .smoke-wisp:nth-child(2) {
-      width: 3px;
-      height: 110px;
+      width: 4px;
+      height: 150px;
       animation-delay: 1.8s;
       animation-duration: 6s;
-      left: 60%;
+      left: 62%;
     }
     .smoke-wisp:nth-child(3) {
-      width: 2px;
-      height: 65px;
+      width: 3px;
+      height: 90px;
       animation-delay: 3.2s;
       animation-duration: 4.5s;
-      left: 38%;
+      left: 36%;
     }
 
     @keyframes rise {
@@ -158,7 +158,7 @@
       transition: border-color 0.3s, box-shadow 0.3s;
       letter-spacing: 0.02em;
     }
-    input[type="email"] { text-align: center; }
+    input[type="email"] { text-align: left; }
     input::placeholder, textarea::placeholder { color: #4a6a67; }
     input:focus, textarea:focus {
       border-color: var(--teal);
@@ -197,13 +197,13 @@
 
     .btn-teal { background: var(--teal); color: #000; }
     .btn-gold  { background: var(--gold); color: #000; }
-    .btn-dark  { background: #141414; color: var(--dim); border: 1px solid #2a2a2a; }
+    .btn-dark  { background: #141414; color: var(--teal); border: 1px solid #2a4a47; }
 
     /* ── VIRGIN SECTION ── */
     .virgin-wrap {
       position: relative;
-      width: 260px;
-      margin: 0 auto -60px; /* overlap into bubble */
+      width: 300px;
+      margin: 0 auto -80px;
       z-index: 2;
     }
 
@@ -213,8 +213,8 @@
       animation: floatVirgin 5s ease-in-out infinite;
       opacity: 0;
       transition: opacity 1.8s ease;
-      -webkit-mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 82%);
-      mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 82%);
+      -webkit-mask-image: radial-gradient(ellipse 72% 90% at 50% 40%, black 30%, transparent 80%);
+      mask-image: radial-gradient(ellipse 72% 90% at 50% 40%, black 30%, transparent 80%);
       filter: drop-shadow(0 0 28px rgba(255, 210, 60, 0.3))
               drop-shadow(0 0 55px rgba(58, 173, 160, 0.18));
     }
@@ -230,11 +230,32 @@
       position: relative;
       background: #080f0e;
       border: 1px solid #1e4a45;
+      border-radius: 18px;
       padding: 3.5rem 2.2rem 2rem;
       width: 100%;
       max-width: 500px;
       box-shadow: 0 0 50px rgba(58, 173, 160, 0.1);
       z-index: 1;
+    }
+    .speech-bubble::before {
+      content: '';
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 14px solid transparent;
+      border-right: 14px solid transparent;
+      border-bottom: 18px solid #1e4a45;
+    }
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 13px solid transparent;
+      border-right: 13px solid transparent;
+      border-bottom: 17px solid #080f0e;
     }
 
     .response-label {
@@ -248,13 +269,14 @@
     }
 
     #response-text {
-      font-family: 'IM Fell English', serif;
-      font-style: italic;
-      font-size: 1.2rem;
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      font-weight: 400;
       color: var(--cream);
-      line-height: 2.1;
+      line-height: 2.2;
       text-align: center;
       min-height: 3rem;
+      letter-spacing: 0.04em;
     }
 
     #response-text .line {
@@ -440,7 +462,7 @@
       <a href="https://poetictoolbox.com/coaching" target="_blank" style="width:100%; max-width:420px">
         <button class="btn btn-gold" style="width:100%">Make Your Dream Project Happen</button>
       </a>
-      <p class="cta-description">One-on-one coaching for artists and creatives who are ready to stop waiting and actually make the thing.</p>
+      <p class="cta-description">One-on-one coaching for people who are ready to stop waiting and actually make the thing.</p>
 
       <div class="cta-divider"></div>
 
@@ -456,7 +478,7 @@
 
       <div class="cta-divider"></div>
 
-      <p class="cta-description" style="color:#3a5a57; margin-bottom:0.1rem">— share her words —</p>
+      <p class="cta-description" style="color:var(--teal); margin-bottom:0.1rem">— share her words —</p>
       <div class="social-row">
         <button class="btn-social btn-ig"   onclick="shareIG()">IG</button>
         <button class="btn-social btn-fb"   onclick="shareFB()">FB</button>
