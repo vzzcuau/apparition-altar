@@ -68,43 +68,45 @@
     /* smoke: single wisp rising from left (sage bundle) */
     .smoke {
       position: absolute;
-      top: 5%;
-      left: 3%;
-      width: 28px;
+      top: 52%;
+      left: 6%;
+      width: 20px;
       pointer-events: none;
     }
     .smoke-wisp {
       position: absolute;
-      bottom: 0;
+      top: 0;
       left: 50%;
-      transform: translateX(-50%);
       width: 3px;
-      height: 110px;
-      background: linear-gradient(to top, rgba(255,255,255,0.32), transparent);
-      border-radius: 50%;
-      animation: rise 5s ease-in infinite;
+      height: 130px;
+      background: linear-gradient(to top, rgba(220,220,210,0.45), rgba(200,200,190,0.15), transparent);
+      border-radius: 40%;
       transform-origin: bottom center;
+      animation: curl 7s ease-out infinite;
     }
     .smoke-wisp:nth-child(2) {
       width: 4px;
-      height: 150px;
-      animation-delay: 1.8s;
-      animation-duration: 6s;
-      left: 62%;
+      height: 160px;
+      animation-delay: 2.2s;
+      animation-duration: 8s;
+      left: 65%;
     }
     .smoke-wisp:nth-child(3) {
-      width: 3px;
-      height: 90px;
-      animation-delay: 3.2s;
-      animation-duration: 4.5s;
-      left: 36%;
+      width: 2px;
+      height: 100px;
+      animation-delay: 4.1s;
+      animation-duration: 6s;
+      left: 35%;
     }
 
-    @keyframes rise {
-      0%   { opacity: 0;    transform: translateX(-50%) scaleX(1) translateY(0); }
-      15%  { opacity: 0.6; }
-      60%  { opacity: 0.25; transform: translateX(-60%) scaleX(1.6) translateY(-40px); }
-      100% { opacity: 0;    transform: translateX(-70%) scaleX(2.2) translateY(-80px); }
+    @keyframes curl {
+      0%   { opacity: 0;    transform: translateX(-50%) translateY(0)    scaleX(1); }
+      8%   { opacity: 0.75; }
+      25%  { opacity: 0.55; transform: translateX(-58%) translateY(-28px) scaleX(1.1); }
+      45%  { opacity: 0.38; transform: translateX(-44%) translateY(-55px) scaleX(1.4); }
+      65%  { opacity: 0.22; transform: translateX(-62%) translateY(-85px) scaleX(1.8); }
+      85%  { opacity: 0.1;  transform: translateX(-48%) translateY(-115px) scaleX(2.2); }
+      100% { opacity: 0;    transform: translateX(-55%) translateY(-135px) scaleX(2.6); }
     }
 
     /* ── HEADINGS ── */
