@@ -379,7 +379,8 @@
   <!-- ══════════════════════════════
        HIDDEN NETLIFY FORM (for detection)
   ══════════════════════════════ -->
-  <form name="contact" data-netlify="true" hidden>
+  <form name="contact" netlify data-netlify="true" hidden>
+    <input type="hidden" name="form-name" value="contact" />
     <input type="text" name="name" />
     <input type="email" name="email" />
     <textarea name="message"></textarea>
@@ -397,7 +398,6 @@
     <p class="eyebrow">The Digital Altar</p>
     <h1 class="page-title">Consult the Divine</h1>
     <div class="divider"></div>
-    <p class="page-subtitle" style="font-size:0.95rem">Have a question? A wish? An impossible dream?</p>
     <p class="page-subtitle" style="font-size:0.95rem">A message from the divine awaits — enter your email to unlock it.</p>
 
     <textarea id="wish-input" placeholder="Make a wish, ask a question, or share what's on your mind"></textarea>
@@ -420,7 +420,7 @@
     </div>
 
     <div class="speech-bubble">
-      <span class="response-label">Today's divinity on duty: The Virgin Mary</span>
+      <span class="response-label">Your divinity on duty: The Virgin Mary</span>
       <p id="response-text"></p>
     </div>
 
@@ -447,7 +447,7 @@
         <input type="email" id="contact-email" placeholder="Your email" />
         <textarea id="contact-msg" style="min-height:90px; max-width:420px" placeholder="What's on your mind?"></textarea>
         <button class="btn btn-dark" style="width:100%; max-width:420px" onclick="submitContact()">Send</button>
-        <span id="contact-success" class="contact-success" style="display:none">She received your message. So did Cuau.</span>
+        <span id="contact-success" class="contact-success" style="display:none">Your message is on its way.</span>
         <span id="contact-error" class="error-msg" style="display:none">Something went sideways. Try again?</span>
       </div>
 
