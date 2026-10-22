@@ -5,94 +5,93 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Talk to the Virgin — Apparition</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Noto+Serif+JP&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap');
 
     :root {
-      --bg: #060d0d;
-      --teal: #2a7a6e;
-      --teal-light: #3aada0;
+      --bg: #000000;
+      --teal: #3aada0;
+      --teal-dark: #1e7a70;
       --gold: #c9a84c;
       --cream: #f0e6d0;
       --dim: #7a9a95;
-      --glow-teal: rgba(42, 122, 110, 0.25);
-      --glow-gold: rgba(201, 168, 76, 0.2);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background-color: var(--bg);
+      background: #000;
       color: var(--cream);
       font-family: 'IM Fell English', serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 2rem 1rem 3rem;
+      padding: 2.5rem 1rem 3rem;
     }
 
     .altar {
-      max-width: 640px;
+      max-width: 620px;
       width: 100%;
       text-align: center;
     }
 
-    /* VIRGIN IMAGE */
-    .virgin-container {
+    /* LOGO */
+    .film-logo {
+      width: 260px;
+      margin: 0 auto 1.8rem;
+      display: block;
+    }
+
+    /* ALTAR SHELF (stage 1) */
+    .altar-shelf {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto 1.8rem;
+      display: block;
+      animation: float 7s ease-in-out infinite;
+    }
+
+    /* VIRGIN (stage 3) */
+    .virgin-wrap {
       position: relative;
-      width: 280px;
-      margin: 0 auto 1.5rem;
+      width: 260px;
+      margin: 0 auto 0.5rem;
     }
 
     .virgin-img {
       width: 100%;
       display: block;
-      border-radius: 4px;
-      filter: saturate(1.1) contrast(1.05);
       animation: float 6s ease-in-out infinite;
-    }
-
-    .virgin-glow {
-      position: absolute;
-      inset: -20px;
-      border-radius: 50%;
-      background: radial-gradient(ellipse at 50% 30%, rgba(255, 220, 80, 0.18) 0%, rgba(42, 122, 110, 0.12) 50%, transparent 75%);
-      animation: pulse 4s ease-in-out infinite;
-      pointer-events: none;
+      filter: drop-shadow(0 0 30px rgba(255, 210, 60, 0.35)) drop-shadow(0 0 60px rgba(42, 173, 160, 0.2));
     }
 
     @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 0.7; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.05); }
-    }
-
-    /* HEADER */
-    .title {
-      font-size: 0.7rem;
+    /* HEADINGS */
+    .eyebrow {
+      font-size: 0.68rem;
       letter-spacing: 0.35em;
-      color: var(--teal-light);
+      color: var(--teal);
       text-transform: uppercase;
       margin-bottom: 0.6rem;
     }
 
-    .virgin-name {
-      font-size: 2.4rem;
+    .page-title {
+      font-size: 2.5rem;
       font-style: italic;
       color: var(--cream);
       margin-bottom: 0.5rem;
       line-height: 1.2;
     }
 
-    .subtitle {
+    .page-subtitle {
       font-size: 1rem;
       color: var(--dim);
       font-style: italic;
-      margin-bottom: 2rem;
+      margin-bottom: 1.8rem;
       line-height: 1.6;
     }
 
@@ -100,88 +99,48 @@
       width: 80px;
       height: 1px;
       background: linear-gradient(to right, transparent, var(--teal), transparent);
-      margin: 0 auto 2rem;
+      margin: 0 auto 1.8rem;
     }
 
     /* STAGES */
-    #stage-email {
-      display: flex;
+    #stage-email, #stage-wish, #stage-response {
+      display: none;
       flex-direction: column;
       align-items: center;
       gap: 1.1rem;
     }
+    #stage-email { display: flex; }
 
-    #stage-email p {
-      font-size: 1rem;
+    .stage-label {
+      font-size: 0.95rem;
       color: var(--dim);
       font-style: italic;
       line-height: 1.7;
-      max-width: 420px;
     }
 
+    /* INPUTS */
     input[type="email"] {
-      background: transparent;
-      border: 1px solid rgba(42, 122, 110, 0.5);
+      background: #111;
+      border: 1px solid var(--teal-dark);
       color: var(--cream);
       font-family: 'IM Fell English', serif;
       font-size: 1.05rem;
-      padding: 0.85rem 1.5rem;
+      padding: 0.9rem 1.5rem;
       width: 100%;
       max-width: 380px;
       text-align: center;
       outline: none;
       transition: border-color 0.3s, box-shadow 0.3s;
     }
-
     input[type="email"]::placeholder { color: var(--dim); }
-
     input[type="email"]:focus {
-      border-color: var(--teal-light);
-      box-shadow: 0 0 16px var(--glow-teal);
-    }
-
-    button {
-      background: transparent;
-      border: 1px solid rgba(201, 168, 76, 0.5);
-      color: var(--gold);
-      font-family: 'IM Fell English', serif;
-      font-size: 0.9rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 0.85rem 2.2rem;
-      cursor: pointer;
-      transition: background 0.3s, color 0.3s, box-shadow 0.3s;
-    }
-
-    button:hover {
-      background: var(--glow-gold);
-      color: var(--cream);
-      box-shadow: 0 0 20px var(--glow-gold);
-    }
-
-    button:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-    }
-
-    /* STAGE 2 */
-    #stage-wish {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.25rem;
-    }
-
-    #stage-wish p {
-      font-size: 1rem;
-      color: var(--dim);
-      font-style: italic;
-      line-height: 1.7;
+      border-color: var(--teal);
+      box-shadow: 0 0 18px rgba(58, 173, 160, 0.2);
     }
 
     textarea {
-      background: transparent;
-      border: 1px solid rgba(42, 122, 110, 0.4);
+      background: #111;
+      border: 1px solid var(--teal-dark);
       color: var(--cream);
       font-family: 'IM Fell English', serif;
       font-size: 1.05rem;
@@ -194,61 +153,68 @@
       line-height: 1.7;
       transition: border-color 0.3s, box-shadow 0.3s;
     }
-
     textarea::placeholder { color: var(--dim); }
-
     textarea:focus {
-      border-color: var(--teal-light);
-      box-shadow: 0 0 16px var(--glow-teal);
+      border-color: var(--teal);
+      box-shadow: 0 0 18px rgba(58, 173, 160, 0.2);
     }
 
-    /* STAGE 3 — response */
-    #stage-response {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.5rem;
-    }
-
-    .response-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.3em;
-      color: var(--teal-light);
+    /* BUTTONS — solid */
+    .btn {
+      font-family: 'IM Fell English', serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      opacity: 0.8;
+      padding: 0.9rem 2rem;
+      cursor: pointer;
+      border: none;
+      transition: filter 0.2s, transform 0.15s;
+      display: inline-block;
+      text-decoration: none;
+      width: 100%;
+      max-width: 420px;
     }
+    .btn:hover { filter: brightness(1.15); transform: translateY(-1px); }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+    .btn-teal { background: var(--teal); color: #000; }
+    .btn-gold  { background: var(--gold); color: #000; }
+    .btn-dark  { background: #1a1a1a; color: var(--dim); border: 1px solid #333; }
 
     /* SPEECH BUBBLE */
     .speech-bubble {
       position: relative;
-      background: rgba(42, 122, 110, 0.08);
-      border: 1px solid rgba(42, 122, 110, 0.35);
+      background: #0d1a18;
+      border: 1px solid var(--teal-dark);
       padding: 1.8rem 2rem;
       max-width: 500px;
       width: 100%;
-      box-shadow: 0 0 30px var(--glow-teal), inset 0 0 20px rgba(42, 122, 110, 0.05);
+      box-shadow: 0 0 40px rgba(58, 173, 160, 0.15);
     }
-
     .speech-bubble::before {
       content: '';
       position: absolute;
-      top: -12px;
-      left: 50%;
+      top: -12px; left: 50%;
       transform: translateX(-50%);
       border-left: 10px solid transparent;
       border-right: 10px solid transparent;
-      border-bottom: 12px solid rgba(42, 122, 110, 0.35);
+      border-bottom: 12px solid var(--teal-dark);
     }
-
     .speech-bubble::after {
       content: '';
       position: absolute;
-      top: -10px;
-      left: 50%;
+      top: -10px; left: 50%;
       transform: translateX(-50%);
       border-left: 9px solid transparent;
       border-right: 9px solid transparent;
-      border-bottom: 11px solid #060d0d;
+      border-bottom: 11px solid #0d1a18;
+    }
+
+    .response-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
+      color: var(--teal);
+      text-transform: uppercase;
     }
 
     .response-text {
@@ -259,73 +225,81 @@
       text-align: center;
     }
 
-    /* CTA BUTTONS AFTER RESPONSE */
+    /* CTA SECTION */
     .cta-section {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 0.75rem;
       width: 100%;
-      max-width: 500px;
-      margin-top: 0.5rem;
-    }
-
-    .cta-label {
-      font-size: 0.72rem;
-      color: var(--dim);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 0.25rem;
-    }
-
-    .cta-btn-primary {
-      width: 100%;
-      border-color: rgba(42, 122, 110, 0.6);
-      color: var(--teal-light);
-      font-size: 0.85rem;
-      padding: 0.9rem 1.5rem;
-    }
-
-    .cta-btn-primary:hover {
-      background: var(--glow-teal);
-      color: var(--cream);
-      box-shadow: 0 0 20px var(--glow-teal);
-    }
-
-    .cta-btn-gold {
-      width: 100%;
-      border-color: rgba(201, 168, 76, 0.5);
-      color: var(--gold);
-      font-size: 0.85rem;
-      padding: 0.9rem 1.5rem;
+      max-width: 420px;
     }
 
     .cta-divider {
-      width: 40px;
+      width: 50px;
       height: 1px;
-      background: rgba(122, 154, 149, 0.2);
-      margin: 0.25rem 0;
+      background: #222;
+      margin: 0.4rem 0;
     }
 
-    .share-row {
+    .cta-description {
+      font-size: 0.78rem;
+      color: var(--dim);
+      font-style: italic;
+      line-height: 1.5;
+      margin-top: -0.3rem;
+      max-width: 360px;
+    }
+
+    /* SOCIAL SHARE ROW */
+    .social-row {
       display: flex;
-      gap: 0.75rem;
+      gap: 0.6rem;
       flex-wrap: wrap;
       justify-content: center;
-      margin-top: 0.25rem;
+      width: 100%;
     }
 
-    .share-btn {
-      font-size: 0.72rem;
-      padding: 0.5rem 1.2rem;
-      border-color: rgba(122, 154, 149, 0.3);
-      color: var(--dim);
+    .btn-social {
+      font-family: 'IM Fell English', serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      padding: 0.6rem 1.1rem;
+      cursor: pointer;
+      border: none;
+      transition: filter 0.2s;
+      flex: 1;
+      min-width: 100px;
     }
+    .btn-social:hover { filter: brightness(1.2); }
 
-    .share-btn:hover {
+    .btn-x       { background: #1a1a1a; color: #e7e7e7; border: 1px solid #333; }
+    .btn-copy    { background: #1a1a1a; color: var(--dim); border: 1px solid #333; }
+    .btn-share   { background: var(--teal-dark); color: var(--cream); }
+
+    /* CONTACT */
+    .contact-form {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.65rem;
+      width: 100%;
+    }
+    .contact-form.open { display: flex; }
+    .contact-form input {
+      background: #111;
+      border: 1px solid #333;
       color: var(--cream);
-      box-shadow: none;
-      background: rgba(122, 154, 149, 0.1);
+      font-family: 'IM Fell English', serif;
+      font-size: 0.95rem;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      outline: none;
+    }
+    .contact-success {
+      font-size: 0.9rem;
+      font-style: italic;
+      color: var(--teal);
     }
 
     .error-msg {
@@ -334,95 +308,60 @@
       font-style: italic;
     }
 
-    .film-link {
+    /* FOOTER */
+    .footer-link {
       margin-top: 3rem;
-      font-size: 0.7rem;
-      color: var(--dim);
+      font-size: 0.68rem;
+      color: #444;
       letter-spacing: 0.15em;
       text-transform: uppercase;
     }
-
-    .film-link a {
-      color: var(--dim);
+    .footer-link a {
+      color: #444;
       text-decoration: none;
-      border-bottom: 1px solid rgba(122, 154, 149, 0.3);
+      border-bottom: 1px solid #333;
       padding-bottom: 1px;
-      transition: color 0.2s, border-color 0.2s;
+      transition: color 0.2s;
     }
-
-    .film-link a:hover {
-      color: var(--teal-light);
-      border-color: var(--teal-light);
-    }
-
-    /* CONTACT FORM */
-    .contact-form {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
-      width: 100%;
-      margin-top: 0.25rem;
-    }
-
-    .contact-form.open {
-      display: flex;
-    }
-
-    .contact-form input[type="text"],
-    .contact-form textarea {
-      min-height: unset;
-      font-size: 0.9rem;
-      padding: 0.75rem 1rem;
-      max-width: 100%;
-      width: 100%;
-    }
-
-    .contact-form button {
-      width: 100%;
-    }
-
-    .contact-success {
-      font-size: 0.9rem;
-      font-style: italic;
-      color: var(--teal-light);
-    }
+    .footer-link a:hover { color: var(--teal); }
 
   </style>
 </head>
 <body>
-
 <div class="altar">
 
-  <!-- VIRGIN IMAGE -->
-  <div class="virgin-container">
-    <div class="virgin-glow"></div>
-    <img class="virgin-img" src="virgin.png" alt="La Virgen de Tokio" />
-  </div>
-
-  <p class="title">The Digital Altar</p>
-  <h1 class="virgin-name">Talk to the Virgin</h1>
-  <p class="subtitle">Make a wish or set an intention.</p>
-  <div class="divider"></div>
-
-  <!-- STAGE 1: email gate -->
+  <!-- ══ STAGE 1: EMAIL GATE ══ -->
   <div id="stage-email">
-    <p>Leave your email and enter the altar.</p>
+    <img class="film-logo" src="logo.png" alt="Apparition" />
+    <img class="altar-shelf" src="altar-shelf.png" alt="The Digital Altar" />
+    <p class="eyebrow">The Digital Altar</p>
+    <h1 class="page-title">Talk to the Virgin</h1>
+    <p class="page-subtitle">Make a wish or set an intention.</p>
+    <div class="divider"></div>
+    <p class="stage-label">Leave your email and enter the altar.</p>
     <input type="email" id="email-input" placeholder="your@email.com" autocomplete="email" />
-    <button id="email-btn" onclick="submitEmail()">Get Your Message</button>
+    <button class="btn btn-teal" id="email-btn" onclick="submitEmail()">Get Your Message</button>
     <span id="email-error" class="error-msg"></span>
   </div>
 
-  <!-- STAGE 2: wish -->
+  <!-- ══ STAGE 2: WISH ══ -->
   <div id="stage-wish">
-    <p>She is listening.</p>
+    <p class="eyebrow">The Digital Altar</p>
+    <h1 class="page-title">Talk to the Virgin</h1>
+    <div class="divider"></div>
+    <p class="stage-label">She is listening.</p>
     <textarea id="wish-input" placeholder="Make a wish, ask a question, or tell her what you're afraid of…"></textarea>
-    <button id="wish-btn" onclick="submitWish()">Speak</button>
+    <button class="btn btn-teal" id="wish-btn" onclick="submitWish()">Speak</button>
     <span id="wish-error" class="error-msg"></span>
   </div>
 
-  <!-- STAGE 3: response -->
+  <!-- ══ STAGE 3: RESPONSE ══ -->
   <div id="stage-response">
+
+    <div class="virgin-wrap">
+      <img class="virgin-img" src="virgin.png" alt="La Virgen de Tokio" />
+    </div>
+
     <span class="response-label">She speaks</span>
 
     <div class="speech-bubble">
@@ -431,51 +370,57 @@
 
     <div class="cta-section">
 
-      <span class="cta-label">— what calls to you —</span>
+      <div class="cta-divider"></div>
 
-      <a href="https://www.youtube.com/watch?v=fAKwDm3W7PE" target="_blank" style="width:100%">
-        <button class="cta-btn-primary" style="width:100%">Watch the Film That Started It All</button>
+      <a href="https://apparition-film.com" target="_blank" style="width:100%">
+        <button class="btn btn-teal" style="width:100%">Learn More About the Film</button>
       </a>
 
       <a href="https://poetictoolbox.com/coaching" target="_blank" style="width:100%">
-        <button class="cta-btn-gold" style="width:100%">Make Your Dream Project Happen</button>
+        <button class="btn btn-gold" style="width:100%">Make Your Dream Project Happen</button>
       </a>
+      <p class="cta-description">One-on-one coaching for artists and creatives who are ready to stop waiting and actually make the thing.</p>
 
       <div class="cta-divider"></div>
 
-      <button class="share-btn" onclick="toggleContact()" id="contact-toggle-btn">Let's Talk →</button>
+      <button class="btn btn-dark" style="width:100%; max-width:420px" onclick="toggleContact()" id="contact-toggle-btn">Let's Talk →</button>
 
       <div class="contact-form" id="contact-form">
         <input type="text" id="contact-name" placeholder="Your name" />
-        <input type="text" id="contact-msg" placeholder="What's on your mind?" style="min-height:unset" />
-        <button onclick="submitContact()">Send</button>
+        <input type="text" id="contact-msg" placeholder="What's on your mind?" />
+        <button class="btn btn-dark" style="width:100%" onclick="submitContact()">Send</button>
         <span id="contact-success" class="contact-success" style="display:none">She received your message. So did Cuau.</span>
       </div>
 
       <div class="cta-divider"></div>
 
-      <div class="share-row">
-        <button class="share-btn" onclick="copyResponse()">Copy her words</button>
-        <button class="share-btn" onclick="askAnother()">Ask another question</button>
+      <p class="cta-description" style="margin-bottom:0.3rem">— share her words —</p>
+      <div class="social-row">
+        <button class="btn-social btn-share" onclick="shareNative()">Share</button>
+        <button class="btn-social btn-x" onclick="shareX()">Post on X</button>
+        <button class="btn-social btn-copy" id="copy-btn" onclick="copyResponse()">Copy</button>
       </div>
+
+      <div class="cta-divider"></div>
+      <button class="btn btn-dark" style="width:100%; font-size:0.78rem" onclick="askAnother()">Ask another question</button>
 
     </div>
   </div>
 
-  <p class="film-link">
-    From the short film <a href="https://apparition-film.com" target="_blank">Apparition</a>
-  </p>
+  <p class="footer-link">From the short film <a href="https://apparition-film.com" target="_blank">Apparition</a></p>
 
 </div>
 
 <script>
   let userEmail = "";
+  let virginResponse = "";
 
   function showStage(name) {
-    document.getElementById("stage-email").style.display = "none";
-    document.getElementById("stage-wish").style.display = "none";
-    document.getElementById("stage-response").style.display = "none";
+    ["email","wish","response"].forEach(s =>
+      document.getElementById("stage-" + s).style.display = "none"
+    );
     document.getElementById("stage-" + name).style.display = "flex";
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   function submitEmail() {
@@ -494,12 +439,10 @@
     const wish = document.getElementById("wish-input").value.trim();
     const errorEl = document.getElementById("wish-error");
     const btn = document.getElementById("wish-btn");
-
     if (!wish) {
       errorEl.textContent = "She cannot answer what has not been asked.";
       return;
     }
-
     errorEl.textContent = "";
     btn.disabled = true;
     btn.textContent = "Your message is being channeled…";
@@ -510,13 +453,11 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ wish, email: userEmail }),
       });
-
-      if (!res.ok) throw new Error("no response");
-
+      if (!res.ok) throw new Error("error");
       const data = await res.json();
-      document.getElementById("response-text").textContent = data.response;
+      virginResponse = data.response;
+      document.getElementById("response-text").textContent = virginResponse;
       showStage("response");
-
     } catch (e) {
       errorEl.textContent = "The connection to the beyond is temporarily disrupted. Try again.";
       btn.disabled = false;
@@ -524,13 +465,28 @@
     }
   }
 
+  function getShareText() {
+    return virginResponse + "\n\n— La Virgen de Tokio\napparition-film.com";
+  }
+
+  function shareNative() {
+    if (navigator.share) {
+      navigator.share({ text: getShareText(), url: "https://apparition-film.com" });
+    } else {
+      copyResponse();
+    }
+  }
+
+  function shareX() {
+    const text = encodeURIComponent(getShareText());
+    window.open("https://twitter.com/intent/tweet?text=" + text, "_blank");
+  }
+
   function copyResponse() {
-    const text = document.getElementById("response-text").textContent;
-    const shareText = text + "\n\n— La Virgen de Tokio, from the film Apparition\napparition-film.com";
-    navigator.clipboard.writeText(shareText).then(() => {
-      const btn = event.target;
+    navigator.clipboard.writeText(getShareText()).then(() => {
+      const btn = document.getElementById("copy-btn");
       btn.textContent = "Copied";
-      setTimeout(() => { btn.textContent = "Copy her words"; }, 2000);
+      setTimeout(() => { btn.textContent = "Copy"; }, 2000);
     });
   }
 
@@ -540,26 +496,23 @@
   }
 
   function toggleContact() {
-    const form = document.getElementById("contact-form");
-    form.classList.toggle("open");
+    document.getElementById("contact-form").classList.toggle("open");
   }
 
-  async function submitContact() {
+  function submitContact() {
     const name = document.getElementById("contact-name").value.trim();
     const msg = document.getElementById("contact-msg").value.trim();
     if (!name || !msg) return;
-
-    const mailto = `mailto:cuau@poetictoolbox.com?subject=From the altar — ${encodeURIComponent(name)}&body=${encodeURIComponent(msg)}`;
-    window.location.href = mailto;
-
+    window.location.href = "mailto:cuau@poetictoolbox.com?subject=" +
+      encodeURIComponent("From the altar — " + name) +
+      "&body=" + encodeURIComponent(msg);
     document.getElementById("contact-success").style.display = "block";
     document.getElementById("contact-toggle-btn").style.display = "none";
   }
 
-  document.getElementById("email-input").addEventListener("keydown", function(e) {
+  document.getElementById("email-input").addEventListener("keydown", e => {
     if (e.key === "Enter") submitEmail();
   });
 </script>
-
 </body>
 </html>
