@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Talk to the Virgin — Apparition</title>
+  <title>Consult the Divine — Apparition</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Cinzel:wght@400;500&family=Lato:wght@300;400&display=swap');
 
@@ -68,46 +68,47 @@
     /* smoke: rises from left tip of sage bundle */
     .smoke {
       position: absolute;
-      bottom: 40%;
-      left: 6%;
-      width: 24px;
-      height: 180px;
+      bottom: 38%;
+      left: 5.5%;
+      width: 30px;
+      height: 200px;
       pointer-events: none;
     }
     .smoke-wisp {
       position: absolute;
       bottom: 0;
       left: 50%;
-      width: 4px;
-      height: 140px;
-      background: linear-gradient(to top, rgba(230,225,215,0.65), rgba(210,205,195,0.3), transparent);
+      width: 5px;
+      height: 160px;
+      background: linear-gradient(to top, rgba(235,228,215,0.75), rgba(215,208,195,0.4), rgba(200,195,180,0.15), transparent);
       border-radius: 50%;
       transform-origin: bottom center;
       animation: curl 7s ease-out infinite;
     }
     .smoke-wisp:nth-child(2) {
-      width: 5px;
-      height: 170px;
+      width: 6px;
+      height: 185px;
       animation-delay: 2.4s;
       animation-duration: 8.5s;
-      left: 68%;
+      left: 70%;
     }
     .smoke-wisp:nth-child(3) {
-      width: 3px;
-      height: 110px;
+      width: 4px;
+      height: 120px;
       animation-delay: 4.5s;
       animation-duration: 6s;
-      left: 32%;
+      left: 30%;
     }
 
     @keyframes curl {
-      0%   { opacity: 0;    transform: translateX(-50%) translateY(0);     }
-      8%   { opacity: 0.85; }
-      22%  { opacity: 0.7;  transform: translateX(-65%) translateY(-22px)  scaleX(1.1); }
-      40%  { opacity: 0.5;  transform: translateX(-40%) translateY(-50px)  scaleX(1.4); }
-      58%  { opacity: 0.3;  transform: translateX(-68%) translateY(-82px)  scaleX(1.8); }
-      76%  { opacity: 0.15; transform: translateX(-45%) translateY(-115px) scaleX(2.2); }
-      100% { opacity: 0;    transform: translateX(-60%) translateY(-145px) scaleX(2.8); }
+      0%   { opacity: 0;    transform: translateX(-50%) translateY(0)       scaleX(1.0); }
+      7%   { opacity: 0.9; }
+      18%  { opacity: 0.75; transform: translateX(-85%) translateY(-20px)   scaleX(1.2); }
+      32%  { opacity: 0.6;  transform: translateX(-22%) translateY(-48px)   scaleX(1.6); }
+      48%  { opacity: 0.4;  transform: translateX(-88%) translateY(-82px)   scaleX(2.1); }
+      64%  { opacity: 0.22; transform: translateX(-18%) translateY(-118px)  scaleX(2.7); }
+      80%  { opacity: 0.1;  transform: translateX(-80%) translateY(-148px)  scaleX(3.2); }
+      100% { opacity: 0;    transform: translateX(-40%) translateY(-170px)  scaleX(3.8); }
     }
 
     /* ── HEADINGS ── */
@@ -322,6 +323,25 @@
       max-width: 360px;
     }
 
+    /* ── CTA SIDE BY SIDE ── */
+    .cta-pair {
+      display: flex;
+      gap: 0.65rem;
+      width: 100%;
+      max-width: 420px;
+    }
+    .cta-pair a {
+      flex: 1;
+      text-decoration: none;
+    }
+    .cta-pair .btn {
+      width: 100%;
+      max-width: none;
+      font-size: 0.78rem;
+      padding: 0.9rem 0.8rem;
+      letter-spacing: 0.1em;
+    }
+
     /* ── SOCIAL ROW ── */
     .social-row {
       display: flex;
@@ -402,9 +422,18 @@
 <div class="altar">
 
   <!-- ══════════════════════════════
-       STAGE 1 — EMAIL GATE
+       HIDDEN NETLIFY FORM (for detection)
   ══════════════════════════════ -->
-  <div class="stage" id="stage-email" style="display:flex">
+  <form name="contact" data-netlify="true" hidden>
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <textarea name="message"></textarea>
+  </form>
+
+  <!-- ══════════════════════════════
+       STAGE 1 — LANDING
+  ══════════════════════════════ -->
+  <div class="stage" id="stage-landing" style="display:flex">
 
     <div class="shelf-wrap">
       <img class="altar-shelf" src="altar-shelf.png" alt="The Digital Altar" />
@@ -416,28 +445,41 @@
     </div>
 
     <p class="eyebrow">The Digital Altar</p>
-    <h1 class="page-title">Talk to the Virgin</h1>
-    <p class="page-subtitle">Make a wish or set an intention.</p>
+    <h1 class="page-title">Consult the Divine</h1>
     <div class="divider"></div>
-    <p class="page-subtitle" style="font-size:0.95rem">Leave your email and enter the altar.</p>
+    <p class="page-subtitle">A message from the divine awaits.<br>Enter your email to unlock it.</p>
 
-    <input type="email" id="email-input" placeholder="your@email.com" autocomplete="email" />
-    <button class="btn btn-teal" id="email-btn" onclick="submitEmail()">Get Your Message</button>
-    <span id="email-error" class="error-msg"></span>
+    <button class="btn btn-teal" onclick="showStage('consult')">Enter the Altar</button>
 
   </div>
 
   <!-- ══════════════════════════════
-       STAGE 2 — WISH
+       STAGE 2 — CONSULT (wish + email combined)
   ══════════════════════════════ -->
-  <div class="stage" id="stage-wish">
+  <div class="stage" id="stage-consult">
+
+    <div class="shelf-wrap">
+      <img class="altar-shelf" src="altar-shelf.png" alt="The Digital Altar" />
+      <div class="smoke">
+        <div class="smoke-wisp"></div>
+        <div class="smoke-wisp"></div>
+        <div class="smoke-wisp"></div>
+      </div>
+    </div>
+
     <p class="eyebrow">The Digital Altar</p>
-    <h1 class="page-title">Talk to the Virgin</h1>
+    <h1 class="page-title">Consult the Divine</h1>
     <div class="divider"></div>
-    <p class="page-subtitle" style="font-size:0.95rem">She is listening.</p>
-    <textarea id="wish-input" placeholder="Make a wish, ask a question, or tell her what you're afraid of…"></textarea>
-    <button class="btn btn-teal" id="wish-btn" onclick="submitWish()">Speak</button>
+    <p class="page-subtitle" style="font-size:0.95rem">Have a question? A wish? An impossible dream?</p>
+
+    <textarea id="wish-input" placeholder="Make a wish, ask a question, or share what's on your mind"></textarea>
+
+    <input type="email" id="email-input" placeholder="your@email.com" autocomplete="email" />
+
+    <button class="btn btn-teal" id="wish-btn" onclick="submitConsult()">Poof! ✨</button>
     <span id="wish-error" class="error-msg"></span>
+    <p class="page-subtitle" style="font-size:0.78rem; color:#4a6a67; margin-top:-0.6rem">Please allow 3 business days for miracles to manifest</p>
+
   </div>
 
   <!-- ══════════════════════════════
@@ -450,7 +492,7 @@
     </div>
 
     <div class="speech-bubble">
-      <span class="response-label">She speaks</span>
+      <span class="response-label">Today's divinity on duty: The Virgin Mary</span>
       <p id="response-text"></p>
     </div>
 
@@ -458,18 +500,23 @@
 
       <div class="cta-divider"></div>
 
-      <a href="https://apparition-film.com" target="_blank" style="width:100%; max-width:420px">
-        <button class="btn btn-teal" style="width:100%">Learn More About the Film</button>
-      </a>
+      <div class="cta-pair">
+        <a href="https://apparition-film.com" target="_blank">
+          <button class="btn btn-teal">Discover the Film</button>
+        </a>
+        <a href="https://poetictoolbox.com/coaching" target="_blank">
+          <button class="btn btn-gold">Make It Happen</button>
+        </a>
+      </div>
 
-      <a href="https://poetictoolbox.com/coaching" target="_blank" style="width:100%; max-width:420px">
-        <button class="btn btn-gold" style="width:100%">Make Your Dream Project Happen</button>
-      </a>
-      <p class="cta-description">One-on-one coaching for people who are ready to stop waiting and actually make the thing.</p>
+      <div style="display:flex; gap:1rem; width:100%; max-width:420px; text-align:left">
+        <p class="cta-description" style="flex:1; margin-top:0">Meet Apparition, a surreal short film about an unexpected encounter with the divine.</p>
+        <p class="cta-description" style="flex:1; margin-top:0">Have a dream project you've been putting off? I offer one-on-one coaching to help you get unstuck and bring it to life.</p>
+      </div>
 
       <div class="cta-divider"></div>
 
-      <button class="btn btn-dark" id="contact-toggle-btn" onclick="toggleContact()">Let's Talk →</button>
+      <button class="btn btn-dark" id="contact-toggle-btn" onclick="toggleContact()">Say Hi! →</button>
 
       <div class="contact-form" id="contact-form">
         <input type="text" id="contact-name" placeholder="Your name" />
@@ -477,11 +524,12 @@
         <textarea id="contact-msg" style="min-height:90px; max-width:420px" placeholder="What's on your mind?"></textarea>
         <button class="btn btn-dark" style="width:100%; max-width:420px" onclick="submitContact()">Send</button>
         <span id="contact-success" class="contact-success" style="display:none">She received your message. So did Cuau.</span>
+        <span id="contact-error" class="error-msg" style="display:none">Something went sideways. Try again?</span>
       </div>
 
       <div class="cta-divider"></div>
 
-      <p class="cta-description" style="color:var(--teal); margin-bottom:0.1rem">— share her words —</p>
+      <p class="cta-description" style="color:var(--teal); margin-bottom:0.1rem">— Share the Magic —</p>
       <div class="social-row">
         <button class="btn-social btn-ig"   onclick="shareIG()">IG</button>
         <button class="btn-social btn-fb"   onclick="shareFB()">FB</button>
@@ -511,7 +559,7 @@
 
   /* ── STAGE TRANSITIONS ── */
   function showStage(name) {
-    ["email","wish","response"].forEach(s => {
+    ["landing","consult","response"].forEach(s => {
       document.getElementById("stage-" + s).style.display = "none";
     });
     const el = document.getElementById("stage-" + name);
@@ -522,28 +570,22 @@
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  /* ── EMAIL ── */
-  function submitEmail() {
+  /* ── CONSULT (wish + email combined) ── */
+  async function submitConsult() {
+    const wish  = document.getElementById("wish-input").value.trim();
     const email = document.getElementById("email-input").value.trim();
-    const errorEl = document.getElementById("email-error");
-    if (!email || !email.includes("@")) {
-      errorEl.textContent = "A real email, please. She insists.";
-      return;
-    }
-    errorEl.textContent = "";
-    userEmail = email;
-    showStage("wish");
-  }
-
-  /* ── WISH ── */
-  async function submitWish() {
-    const wish = document.getElementById("wish-input").value.trim();
     const errorEl = document.getElementById("wish-error");
-    const btn = document.getElementById("wish-btn");
+    const btn   = document.getElementById("wish-btn");
+
     if (!wish) {
       errorEl.textContent = "She cannot answer what has not been asked.";
       return;
     }
+    if (!email || !email.includes("@")) {
+      errorEl.textContent = "A real email, please. She insists.";
+      return;
+    }
+
     errorEl.textContent = "";
     btn.disabled = true;
     btn.textContent = "Channeling…";
@@ -552,40 +594,38 @@
       const res = await fetch("/.netlify/functions/virgin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ wish, email: userEmail }),
+        body: JSON.stringify({ wish, email }),
       });
       if (!res.ok) throw new Error("error");
       const data = await res.json();
+      userEmail = email;
       virginResponse = data.response;
       showStage("response");
       revealVirginAndText(virginResponse);
     } catch (e) {
       errorEl.textContent = "The connection to the beyond is temporarily disrupted. Try again.";
       btn.disabled = false;
-      btn.textContent = "Speak";
+      btn.textContent = "Poof! ✨";
     }
   }
 
   /* ── VIRGIN APPARITION + LINE-BY-LINE TEXT ── */
   function revealVirginAndText(text) {
-    // Virgin fades in first
     setTimeout(() => {
       document.getElementById("virgin-img").classList.add("appeared");
     }, 400);
 
-    // Parse text into lines — split on sentence-ending punctuation
     const rawLines = text.match(/[^.!?…]+[.!?…]*/g) || [text];
     const responseEl = document.getElementById("response-text");
     responseEl.innerHTML = "";
 
-    rawLines.forEach((line, i) => {
+    rawLines.forEach((line) => {
       const span = document.createElement("span");
       span.className = "line";
       span.textContent = line.trim();
       responseEl.appendChild(span);
     });
 
-    // Reveal lines one by one after Virgin appears
     rawLines.forEach((_, i) => {
       setTimeout(() => {
         const lines = responseEl.querySelectorAll(".line");
@@ -593,75 +633,109 @@
       }, 1800 + i * 600);
     });
 
-    // Show CTAs after all lines have appeared
     const totalDelay = 1800 + rawLines.length * 600 + 600;
     setTimeout(() => {
       const cta = document.getElementById("cta-section");
-      cta.style.opacity = "1";
+      if (cta) cta.style.opacity = "1";
     }, totalDelay);
   }
 
-  /* ── SHARE FUNCTIONS ── */
-  function getShareText() {
-    return "The Virgin had a message for me:\n\n“" + virginResponse + "”\n\nGet yours at altar.apparition-film.com";
-  }
-
-  function shareIG() {
-    // Instagram has no web share URL — copy to clipboard and prompt
-    navigator.clipboard.writeText(getShareText()).then(() => {
-      alert("Copied! Open Instagram, create a new post or story, and paste.");
-    });
-  }
-
-  function shareFB() {
-    const url = encodeURIComponent("https://altar.apparition-film.com");
-    const quote = encodeURIComponent(getShareText());
-    window.open("https://www.facebook.com/sharer/sharer.php?u=" + url + "&quote=" + quote, "_blank");
-  }
-
-  function shareX() {
-    const text = encodeURIComponent(getShareText());
-    window.open("https://twitter.com/intent/tweet?text=" + text, "_blank");
-  }
-
-  function copyResponse() {
-    navigator.clipboard.writeText(getShareText()).then(() => {
-      const btn = document.getElementById("copy-btn");
-      btn.textContent = "✓";
-      setTimeout(() => { btn.textContent = "Copy"; }, 2000);
-    });
-  }
-
-  /* ── CONTACT ── */
+  /* ── CONTACT FORM (Netlify Forms via AJAX) ── */
   function toggleContact() {
-    document.getElementById("contact-form").classList.toggle("open");
+    const form = document.getElementById("contact-form");
+    form.classList.toggle("open");
   }
 
-  function submitContact() {
-    const name = document.getElementById("contact-name").value.trim();
+  async function submitContact() {
+    const name  = document.getElementById("contact-name").value.trim();
     const email = document.getElementById("contact-email").value.trim();
-    const msg = document.getElementById("contact-msg").value.trim();
+    const msg   = document.getElementById("contact-msg").value.trim();
+    const successEl = document.getElementById("contact-success");
+    const errorEl   = document.getElementById("contact-error");
+
     if (!name || !email || !msg) return;
-    window.location.href = "mailto:cuau@poetictoolbox.com"
-      + "?subject=" + encodeURIComponent("From the altar — " + name)
-      + "&body=" + encodeURIComponent("From: " + name + " (" + email + ")\n\n" + msg);
-    document.getElementById("contact-success").style.display = "block";
-    document.getElementById("contact-toggle-btn").style.display = "none";
+
+    successEl.style.display = "none";
+    errorEl.style.display   = "none";
+
+    try {
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          "form-name": "contact",
+          name,
+          email,
+          message: msg,
+        }).toString(),
+      });
+      if (!res.ok) throw new Error("error");
+      successEl.style.display = "block";
+      document.getElementById("contact-toggle-btn").style.display = "none";
+    } catch (e) {
+      errorEl.style.display = "block";
+    }
   }
 
   /* ── ASK ANOTHER ── */
   function askAnother() {
     document.getElementById("wish-input").value = "";
+    document.getElementById("email-input").value = "";
+    document.getElementById("wish-error").textContent = "";
+    const btn = document.getElementById("wish-btn");
+    btn.disabled = false;
+    btn.textContent = "Poof! ✨";
     document.getElementById("virgin-img").classList.remove("appeared");
-    document.getElementById("cta-section").style.opacity = "0";
     document.getElementById("response-text").innerHTML = "";
-    showStage("wish");
+    const cta = document.getElementById("cta-section");
+    if (cta) cta.style.opacity = "0";
+    showStage("consult");
   }
 
-  /* ── ENTER KEY ON EMAIL ── */
-  document.getElementById("email-input").addEventListener("keydown", e => {
-    if (e.key === "Enter") submitEmail();
-  });
+  /* ── SHARE HELPERS ── */
+  function getShareText() {
+    return "The Virgin had a message for me:\n\n“" + virginResponse + "”\n\nGet yours at altar.apparition-film.com";
+  }
+
+  function shareIG() {
+    copyToClipboard(getShareText());
+    alert("Copied! Paste it into your Instagram story or caption 🤍");
+  }
+
+  function shareFB() {
+    window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent("https://altar.apparition-film.com"), "_blank");
+  }
+
+  function shareX() {
+    const tweet = "“" + virginResponse.slice(0, 200) + "” — La Virgen de Tokio\n\nGet your message: altar.apparition-film.com";
+    window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(tweet), "_blank");
+  }
+
+  function copyResponse() {
+    copyToClipboard(getShareText());
+    const btn = document.getElementById("copy-btn");
+    btn.textContent = "Copied!";
+    setTimeout(() => { btn.textContent = "Copy"; }, 2000);
+  }
+
+  function copyToClipboard(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).catch(() => fallbackCopy(text));
+    } else {
+      fallbackCopy(text);
+    }
+  }
+
+  function fallbackCopy(text) {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    document.body.removeChild(ta);
+  }
 </script>
 </body>
 </html>
