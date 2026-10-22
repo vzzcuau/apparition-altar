@@ -68,8 +68,8 @@
     /* smoke: single wisp rising from left (sage bundle) */
     .smoke {
       position: absolute;
-      bottom: 18%;
-      left: 7%;
+      top: 5%;
+      left: 3%;
       width: 28px;
       pointer-events: none;
     }
@@ -213,8 +213,8 @@
       animation: floatVirgin 5s ease-in-out infinite;
       opacity: 0;
       transition: opacity 1.8s ease;
-      -webkit-mask-image: radial-gradient(ellipse 72% 90% at 50% 40%, black 30%, transparent 80%);
-      mask-image: radial-gradient(ellipse 72% 90% at 50% 40%, black 30%, transparent 80%);
+      -webkit-mask-image: linear-gradient(to bottom, black 0%, black 45%, transparent 68%);
+      mask-image: linear-gradient(to bottom, black 0%, black 45%, transparent 68%);
       filter: drop-shadow(0 0 28px rgba(255, 210, 60, 0.3))
               drop-shadow(0 0 55px rgba(58, 173, 160, 0.18));
     }
@@ -228,7 +228,7 @@
     /* ── SPEECH BUBBLE ── */
     .speech-bubble {
       position: relative;
-      background: #080f0e;
+      background: #060d0c;
       border: 1px solid #1e4a45;
       border-radius: 18px;
       padding: 3.5rem 2.2rem 2rem;
@@ -310,10 +310,10 @@
 
     .cta-description {
       font-family: 'Lato', sans-serif;
-      font-weight: 300;
-      font-size: 0.82rem;
-      color: #5a7a77;
-      line-height: 1.6;
+      font-weight: 400;
+      font-size: 0.92rem;
+      color: #a0c8c4;
+      line-height: 1.7;
       letter-spacing: 0.02em;
       margin-top: -0.4rem;
       max-width: 360px;
@@ -382,16 +382,16 @@
       font-weight: 300;
       font-size: 0.7rem;
       letter-spacing: 0.22em;
-      color: #333;
+      color: #888;
       text-transform: uppercase;
     }
     .footer-sig a { display: block; }
     .footer-sig img {
       width: 130px;
-      opacity: 0.5;
+      opacity: 0.8;
       transition: opacity 0.3s;
     }
-    .footer-sig a:hover img { opacity: 0.85; }
+    .footer-sig a:hover img { opacity: 1; }
 
   </style>
 </head>
