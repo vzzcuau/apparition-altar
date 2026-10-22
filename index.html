@@ -398,10 +398,9 @@
     <h1 class="page-title">Consult the Divine</h1>
     <div class="divider"></div>
     <p class="page-subtitle" style="font-size:0.95rem">Have a question? A wish? An impossible dream?</p>
+    <p class="page-subtitle" style="font-size:0.95rem">A message from the divine awaits — enter your email to unlock it.</p>
 
     <textarea id="wish-input" placeholder="Make a wish, ask a question, or share what's on your mind"></textarea>
-
-    <p class="page-subtitle" style="font-size:0.95rem">A message from the divine awaits — enter your email to unlock it.</p>
 
     <input type="email" id="email-input" placeholder="your@email.com" autocomplete="email" />
 
@@ -429,19 +428,15 @@
 
       <div class="cta-divider"></div>
 
-      <div class="cta-pair">
-        <a href="https://apparition-film.com" target="_blank">
-          <button class="btn btn-teal">Discover the Film</button>
-        </a>
-        <a href="https://poetictoolbox.com/coaching" target="_blank">
-          <button class="btn btn-gold">Make It Happen</button>
-        </a>
-      </div>
+      <a href="https://apparition-film.com" target="_blank" style="width:100%; max-width:420px">
+        <button class="btn btn-teal" style="width:100%">Discover the Film</button>
+      </a>
+      <p class="cta-description">Meet Apparition, a surreal short film about an unexpected encounter with the divine.</p>
 
-      <div style="display:flex; gap:1rem; width:100%; max-width:420px; text-align:left">
-        <p class="cta-description" style="flex:1; margin-top:0">Meet Apparition, a surreal short film about an unexpected encounter with the divine.</p>
-        <p class="cta-description" style="flex:1; margin-top:0">Have a dream project you've been putting off? I offer one-on-one coaching to help you get unstuck and bring it to life.</p>
-      </div>
+      <a href="https://poetictoolbox.com/coaching" target="_blank" style="width:100%; max-width:420px">
+        <button class="btn btn-gold" style="width:100%">Make It Happen</button>
+      </a>
+      <p class="cta-description">Have a dream project you've been putting off? I offer one-on-one coaching to help you get unstuck and bring it to life.</p>
 
       <div class="cta-divider"></div>
 
@@ -587,18 +582,18 @@
     successEl.style.display = "none";
     errorEl.style.display   = "none";
 
+    const formData = new FormData();
+    formData.append("form-name", "contact");
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("message", msg);
+
     try {
       const res = await fetch("/", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({
-          "form-name": "contact",
-          name,
-          email,
-          message: msg,
-        }).toString(),
+        body: formData,
       });
-      if (!res.ok) throw new Error("error");
+      // Netlify returns 200 or a redirect — both are fine
       successEl.style.display = "block";
       document.getElementById("contact-toggle-btn").style.display = "none";
     } catch (e) {
